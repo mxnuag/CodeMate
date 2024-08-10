@@ -4,6 +4,7 @@ import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
 
 function Navbar() {
   const [user, setUser] = useState(null);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -11,6 +12,16 @@ function Navbar() {
     });
 
     return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50); // Change 50 to the scroll threshold you prefer
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleSignIn = async () => {
@@ -31,7 +42,7 @@ function Navbar() {
   };
 
   return (
-    <div className='main lg:flex md:flex flex-wrap justify-between items-center px-4 bg-[#2f3640] py-4'>
+    <div className={`main lg:flex md:flex flex-wrap justify-between items-center px-4 py-4 ${isScrolled ? 'navbar-scrolled' : ''}`}>
       <div className="left">
         <div className="logo font-bold text-2xl text-white text-center">
           <img className='w-44' src="/Codemate.png" alt="Logo" />

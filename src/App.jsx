@@ -5,7 +5,9 @@ import { html } from '@codemirror/lang-html';
 import { css } from '@codemirror/lang-css';
 import { javascript } from '@codemirror/lang-javascript';
 import Result from './components/Result';
-import Preloader from './components/Preloder';  // Ensure the path is correct
+import Preloader from './components/Preloder';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import Toastify styles
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -17,7 +19,6 @@ function App() {
   useEffect(() => {
     const preloaderDuration = 5000;
     const fadeOutDuration = 1000;
-    const totalDuration = preloaderDuration + fadeOutDuration;
 
     const timer = setTimeout(() => {
       setLoading(false);
@@ -39,14 +40,27 @@ function App() {
   </html>
   `;
 
+  const handleSignInSuccess = () => {
+    toast.success("Successfully signed in!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
   return (
     <div className="relative">
+      <ToastContainer />
       {loading ? (
         <Preloader />
       ) : (
         <div className={`transition-opacity duration-1000 ease-in-out ${showContent ? 'opacity-100' : 'opacity-0'} absolute inset-0`}>
           {/* Navbar */}
-          <Navbar />
+          <Navbar onSignInSuccess={handleSignInSuccess} />
 
           {/* Main content */}
           <div className="p-2">

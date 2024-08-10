@@ -9,7 +9,7 @@ function Result({srcCode}) {
                     Result
                 </h2>
                 <iframe
-                    className="bg-sky-400 w-full h-60 border border-gray-500 rounded-md bg-text-white"
+                    className="bg-gray-500 w-full h-60 border border-gray-500 rounded-md bg-text-white"
                     srcDoc={srcCode}
                     title="output"
                     sandbox="allow-scripts"
