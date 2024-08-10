@@ -5,7 +5,7 @@ import { html } from '@codemirror/lang-html';
 import { css } from '@codemirror/lang-css';
 import { javascript } from '@codemirror/lang-javascript';
 import Result from './components/Result';
-import Preloader from './components/Preloder';  // Adjust the path if necessary
+import Preloader from './components/Preloder';  
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -15,16 +15,12 @@ function App() {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-    // Duration of the preloader
     const preloaderDuration = 5000;
-    // Duration for fading out the preloader
     const fadeOutDuration = 1000;
-    // Total duration before showing the content
     const totalDuration = preloaderDuration + fadeOutDuration;
 
     const timer = setTimeout(() => {
       setLoading(false);
-      // Delay the show content transition to ensure preloader fades out
       setTimeout(() => setShowContent(true), fadeOutDuration);
     }, preloaderDuration);
 
@@ -48,7 +44,7 @@ function App() {
       {loading ? (
         <Preloader />
       ) : (
-        <div className={`fade-in ${showContent ? 'show' : ''} absolute inset-0`}>
+        <div className={`transition-opacity duration-1000 ease-in-out ${showContent ? 'opacity-100' : 'opacity-0'} absolute inset-0`}>
           {/* Navbar */}
           <Navbar />
 
