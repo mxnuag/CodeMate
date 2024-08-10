@@ -5,7 +5,7 @@ import { html } from '@codemirror/lang-html';
 import { css } from '@codemirror/lang-css';
 import { javascript } from '@codemirror/lang-javascript';
 import Result from './components/Result';
-import Preloader from './components/Preloder';  
+import Preloader from './components/Preloder';  // Ensure the path is correct
 
 function App() {
   const [loading, setLoading] = useState(true);
